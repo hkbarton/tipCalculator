@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		075891B31A526DA0001F980A /* TipCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 075891B21A526DA0001F980A /* TipCalculator.m */; };
 		0798FB8D1A50BEA6000D39D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0798FB8C1A50BEA6000D39D7 /* main.m */; };
 		0798FB901A50BEA6000D39D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0798FB8F1A50BEA6000D39D7 /* AppDelegate.m */; };
 		0798FB961A50BEA6000D39D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0798FB941A50BEA6000D39D7 /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		075891B11A526DA0001F980A /* TipCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipCalculator.h; sourceTree = "<group>"; };
+		075891B21A526DA0001F980A /* TipCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipCalculator.m; sourceTree = "<group>"; };
 		0798FB871A50BEA6000D39D7 /* tipCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tipCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0798FB8B1A50BEA6000D39D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0798FB8C1A50BEA6000D39D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				07E516C81A5123EE007C681C /* SettingsViewController.h */,
 				07E516C91A5123EE007C681C /* SettingsViewController.m */,
 				07E516CA1A5123EE007C681C /* SettingsViewController.xib */,
+				075891B11A526DA0001F980A /* TipCalculator.h */,
+				075891B21A526DA0001F980A /* TipCalculator.m */,
 			);
 			path = tipCalculator;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				0798FBB31A50C830000D39D7 /* TipViewController.m in Sources */,
 				0798FB8D1A50BEA6000D39D7 /* main.m in Sources */,
 				07E516CB1A5123EE007C681C /* SettingsViewController.m in Sources */,
+				075891B31A526DA0001F980A /* TipCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

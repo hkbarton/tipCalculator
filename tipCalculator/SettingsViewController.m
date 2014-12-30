@@ -7,8 +7,13 @@
 //
 
 #import "SettingsViewController.h"
+#import "TipCalculator.h"
 
 @interface SettingsViewController ()
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDefaultTipPercentage;
+
+- (IBAction)onSegmentDefaultTipPercentageValueChanged:(id)sender;
 
 @end
 
@@ -16,7 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    TipCalculator *tc = [TipCalculator defaultTipCalculator];
+    // clear placeholder segment
+    [self.segmentDefaultTipPercentage removeAllSegments];
+    // init with data in TipCalculator
+    for (int i=0; i<tc.tipPercentage.count; i++){
+        [self.segmentDefaultTipPercentage insertSegmentWithTitle:tc.tipPercentageDescription[i]
+                                                         atIndex:i
+                                                        animated:NO];
+    }
+    // set default selection
+    self.segmentDefaultTipPercentage.selectedSegmentIndex = [tc getIndexOfDefaultTipPercentage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +39,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)onSegmentDefaultTipPercentageValueChanged:(id)sender {
+    TipCalculator *tc = [TipCalculator defaultTipCalculator];
+    [tc updateDefaultTipPercentage:
+     [tc.tipPercentage[self.segmentDefaultTipPercentage.selectedSegmentIndex] floatValue]];
 }
-*/
 
 @end

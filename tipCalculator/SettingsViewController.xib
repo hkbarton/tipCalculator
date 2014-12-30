@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
             <connections>
+                <outlet property="segmentDefaultTipPercentage" destination="KeB-9u-nAu" id="Hay-TH-pdl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,35 +16,39 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Tip Percentage:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-0b-DkZ">
-                    <rect key="frame" x="8" y="89" width="180" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="Usg-lO-wVl"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KeB-9u-nAu">
-                    <rect key="frame" x="176" y="127" width="248" height="29"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="248" id="6Vc-Sp-Czw"/>
-                    </constraints>
+                    <rect key="frame" x="8" y="118" width="584" height="29"/>
                     <segments>
                         <segment title="10%"/>
                         <segment title="15%"/>
                         <segment title="20%"/>
                     </segments>
+                    <connections>
+                        <action selector="onSegmentDefaultTipPercentageValueChanged:" destination="-1" eventType="valueChanged" id="YKy-UA-JaT"/>
+                    </connections>
                 </segmentedControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Tip Percentage:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-0b-DkZ">
+                    <rect key="frame" x="8" y="84" width="180" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="AyF-Yg-RTf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="KeB-9u-nAu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1TW-es-dKF"/>
-                <constraint firstItem="Bgr-0b-DkZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="89" id="6zj-nj-C0L"/>
-                <constraint firstItem="KeB-9u-nAu" firstAttribute="top" secondItem="Bgr-0b-DkZ" secondAttribute="bottom" constant="17" id="asG-Ub-S7w"/>
-                <constraint firstItem="Bgr-0b-DkZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="lly-hS-DiN"/>
+                <constraint firstItem="KeB-9u-nAu" firstAttribute="top" secondItem="Bgr-0b-DkZ" secondAttribute="bottom" constant="13" id="4uB-ot-hK4"/>
+                <constraint firstItem="KeB-9u-nAu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="HsY-z5-8DE"/>
+                <constraint firstItem="Bgr-0b-DkZ" firstAttribute="leading" secondItem="KeB-9u-nAu" secondAttribute="leading" id="Z9b-bf-c5S"/>
+                <constraint firstItem="KeB-9u-nAu" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="e0k-Jh-h5s"/>
+                <constraint firstAttribute="trailing" secondItem="KeB-9u-nAu" secondAttribute="trailing" constant="8" id="hrc-DF-yQU"/>
+                <constraint firstItem="Bgr-0b-DkZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="wlt-wF-gLD"/>
+                <constraint firstItem="KeB-9u-nAu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="xe5-xz-50D"/>
+                <constraint firstItem="Bgr-0b-DkZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="yfA-GU-Law"/>
             </constraints>
-            <point key="canvasLocation" x="210" y="155"/>
+            <point key="canvasLocation" x="104" y="155"/>
         </view>
     </objects>
 </document>
