@@ -107,11 +107,13 @@
     Tip tip = [tc calculateTip:[self.txtBillAmount.text floatValue]
                 withPercentage:[tc.tipPercentage[self.segmentTipRate.selectedSegmentIndex] floatValue]
                     forPersons:self.sliderPersonCount.value];
-    self.labelBillAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.billAmount];
-    self.labelTipAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.tipAmount];
-    self.labelTotalAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.totalAmount];
+    NSNumberFormatter *currencyFormat = [[NSNumberFormatter alloc] init];
+    [currencyFormat setNumberStyle: NSNumberFormatterCurrencyStyle];
+    self.labelBillAmount.text = [currencyFormat stringFromNumber: [NSNumber numberWithFloat: tip.billAmount]];
+    self.labelTipAmount.text = [currencyFormat stringFromNumber: [NSNumber numberWithFloat: tip.tipAmount]];
+    self.labelTotalAmount.text = [currencyFormat stringFromNumber: [NSNumber numberWithFloat: tip.totalAmount]];
     self.labelPersonCount.text = [NSString stringWithFormat: @"%d", tip.personCount];
-    self.labelTotalPerPerson.text = [NSString stringWithFormat: @"$%0.2f", tip.totalPerPerson];
+    self.labelTotalPerPerson.text = [currencyFormat stringFromNumber: [NSNumber numberWithFloat: tip.totalPerPerson]];
 }
 
 @end
