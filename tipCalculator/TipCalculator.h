@@ -12,7 +12,7 @@ typedef struct {
     float billAmount;
     float tipAmount;
     float totalAmount;
-    float personCount;
+    int personCount;
     float tipPerPerson;
     float totalPerPerson;
 } Tip;

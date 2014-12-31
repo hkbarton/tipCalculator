@@ -8,7 +8,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
+                <outlet property="labelBillAmount" destination="U6t-eu-pKY" id="Fxp-7T-wdj"/>
+                <outlet property="labelPersonCount" destination="9Yt-HH-qmQ" id="VaS-FU-a0N"/>
+                <outlet property="labelTipAmount" destination="yoP-Xu-odz" id="7TW-Ca-bhe"/>
+                <outlet property="labelTotalAmount" destination="fLh-dU-v99" id="mN5-l9-0Hk"/>
+                <outlet property="labelTotalPerPerson" destination="Xw7-86-t4m" id="hRT-rd-vIn"/>
                 <outlet property="segmentTipRate" destination="gCM-2h-GX4" id="DLq-gu-cve"/>
+                <outlet property="sliderPersonCount" destination="cBy-SC-FIa" id="XZI-2Z-MsV"/>
                 <outlet property="txtBillAmount" destination="gIr-7t-mqF" id="49h-kk-Xge"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -60,6 +66,9 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6t-eu-pKY">
                             <rect key="frame" x="559" y="22" width="33" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="t5B-o5-VGH"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.88596141579999999" green="0.88596141579999999" blue="0.88596141579999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -118,11 +127,14 @@
                         <constraint firstAttribute="height" constant="30" id="Xjz-ZO-qSx"/>
                         <constraint firstAttribute="width" constant="153" id="Z4S-NW-rCQ"/>
                     </constraints>
+                    <connections>
+                        <action selector="onSliderPersonCountValueChanged:" destination="-1" eventType="valueChanged" id="gJe-N8-Qdz"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yt-HH-qmQ">
-                    <rect key="frame" x="167" y="342" width="16" height="21"/>
+                    <rect key="frame" x="167" y="342" width="30" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="16" id="bsP-iG-jIS"/>
+                        <constraint firstAttribute="width" constant="30" id="bsP-iG-jIS"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -168,7 +180,7 @@
                     </segments>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="onTipRateChanged:" destination="-1" eventType="valueChanged" id="KEp-pp-Of4"/>
+                        <action selector="onSegmentTipRateValueChanged:" destination="-1" eventType="valueChanged" id="b2p-j2-oSn"/>
                     </connections>
                 </segmentedControl>
             </subviews>
@@ -207,15 +219,7 @@
                 <constraint firstItem="aPL-tc-t82" firstAttribute="firstBaseline" secondItem="9Yt-HH-qmQ" secondAttribute="firstBaseline" id="zPp-q3-Cy9"/>
                 <constraint firstAttribute="trailing" secondItem="Xw7-86-t4m" secondAttribute="trailing" constant="8" id="zg1-6K-dMh"/>
             </constraints>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="mgN-kB-hx0" appends="YES" id="umt-Bc-sad"/>
-            </connections>
             <point key="canvasLocation" x="75" y="120"/>
         </view>
-        <tapGestureRecognizer id="mgN-kB-hx0">
-            <connections>
-                <action selector="onViewTap:" destination="-1" id="ogs-MC-TfQ"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>

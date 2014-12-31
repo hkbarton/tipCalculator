@@ -8,19 +8,24 @@
 
 #import "TipViewController.h"
 #import "SettingsViewController.h"
+#import "TipCalculator.h"
 
 @interface TipViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *txtBillAmount;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentTipRate;
+@property (weak, nonatomic) IBOutlet UILabel *labelBillAmount;
 @property (weak, nonatomic) IBOutlet UILabel *labelTipAmount;
 @property (weak, nonatomic) IBOutlet UILabel *labelTotalAmount;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentTipRate;
+@property (weak, nonatomic) IBOutlet UILabel *labelPersonCount;
+@property (weak, nonatomic) IBOutlet UILabel *labelTotalPerPerson;
+@property (weak, nonatomic) IBOutlet UISlider *sliderPersonCount;
 
-- (void)updateAmount;
+- (void)updateUI;
 
-- (IBAction)onViewTap:(id)sender;
-- (IBAction)onTipRateChanged:(id)sender;
+- (IBAction)onSegmentTipRateValueChanged:(id)sender;
 - (IBAction)onBillAmountEditing:(id)sender;
+- (IBAction)onSliderPersonCountValueChanged:(id)sender;
 - (void)onSettingButtonClicked;
 
 @end
@@ -37,11 +42,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(onSettingButtonClicked)];
-    [self updateAmount];
+    TipCalculator *tc = [TipCalculator defaultTipCalculator];
+    
+    // setup setting button of navigation bar
+    self.navigationItem.rightBarButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                         style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(onSettingButtonClicked)];
+    // setup segment
+    // clear placeholder segments
+    [self.segmentTipRate removeAllSegments];
+    // init segment with data in TipCalculator
+    for (int i=0; i<tc.tipPercentage.count; i++){
+        [self.segmentTipRate insertSegmentWithTitle:tc.tipPercentageDescription[i]
+                                            atIndex:i
+                                           animated:NO];
+    }
+    // set default selection
+    self.segmentTipRate.selectedSegmentIndex = [tc getIndexOfDefaultTipPercentage];
+    
+    [self updateUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    TipCalculator *tc = [TipCalculator defaultTipCalculator];
+    
+    // update tip percentage when come back from setting page
+    self.segmentTipRate.selectedSegmentIndex = [tc getIndexOfDefaultTipPercentage];
+    
+    [self updateUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // always focus on txtBillAmount and show keyboard
+    [self.txtBillAmount becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,34 +86,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateAmount {
-    float billAmount = [self.txtBillAmount.text floatValue];
-    
-    NSArray *tipRates = @[@(0.1),@(0.15),@(0.2)];
-    
-    float currentRate = [tipRates[self.segmentTipRate.selectedSegmentIndex] floatValue];
-    float tipAmount = billAmount * currentRate;
-    float totalAmount = billAmount + tipAmount;
-    
-    self.labelTipAmount.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
-    self.labelTotalAmount.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-}
-
-- (IBAction)onViewTap:(id)sender {
-    [self.view endEditing:YES];
-    [self updateAmount];
-}
-
-- (IBAction)onTipRateChanged:(id)sender {
-    [self updateAmount];
+- (IBAction)onSegmentTipRateValueChanged:(id)sender {
+    [self updateUI];
 }
 
 - (IBAction)onBillAmountEditing:(id)sender {
-    [self updateAmount];
+    [self updateUI];
+}
+
+- (IBAction)onSliderPersonCountValueChanged:(id)sender {
+    [self updateUI];
 }
 
 - (void)onSettingButtonClicked {
     [self.navigationController pushViewController:[[SettingsViewController alloc] init] animated:YES];
+}
+
+- (void)updateUI {
+    TipCalculator *tc = [TipCalculator defaultTipCalculator];
+    Tip tip = [tc calculateTip:[self.txtBillAmount.text floatValue]
+                withPercentage:[tc.tipPercentage[self.segmentTipRate.selectedSegmentIndex] floatValue]
+                    forPersons:self.sliderPersonCount.value];
+    self.labelBillAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.billAmount];
+    self.labelTipAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.tipAmount];
+    self.labelTotalAmount.text = [NSString stringWithFormat: @"$%0.2f", tip.totalAmount];
+    self.labelPersonCount.text = [NSString stringWithFormat: @"%d", tip.personCount];
+    self.labelTotalPerPerson.text = [NSString stringWithFormat: @"$%0.2f", tip.totalPerPerson];
 }
 
 @end
